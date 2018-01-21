@@ -45,7 +45,9 @@ class HashTable {
     if (bucket.length === 0) {
       const newList = new LinkedList();
       newList.addToTail([key, value]);
-      bucket.push(newList);
+      console.log('before the push: ', bucket);
+      bucket.push(newList.tail.value);
+      console.log('after the push: ', bucket);
       this.storage.set(index, bucket);
       return;
     }
