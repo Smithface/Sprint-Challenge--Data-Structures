@@ -74,18 +74,19 @@ class LinkedList {
     return value;
   }
 
-  returnKeyIfContainsValue(value) {
+  returnValueIfContainsKey(key) {
     // if no elements, return false (changed false to undefined)
     if (this.head === null) return undefined;
     // define a recursive function that searches Linked List
     const searchLinkedList = (node) => {
-      // if we find the value, return true (changed true to value)
-      if (node.value[0] === value[0]) return value[1];
+      // if we find the key, return true (changed true to node.value[1])
+      if (node.value[0] === key) return node.value[1];
       // if we reach the end without finding the value, return false (changed false to undefined)
       if (node.value[0] === null) return undefined;
       // check this node.next's value, and continue recursion until given true or false
       return searchLinkedList(node.next);
     };
+    return searchLinkedList(this.head);
   }
 }
 /* eslint-disable no-bitwise, operator-assignment */

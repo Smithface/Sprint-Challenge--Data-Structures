@@ -80,7 +80,7 @@ class HashTable {
     const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
     if (bucket) {
-      return bucket[0].returnKeyIfContainsValue(key);
+      return bucket[0].returnValueIfContainsKey(key);
     }
     return undefined;
   }
