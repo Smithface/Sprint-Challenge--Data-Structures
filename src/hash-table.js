@@ -49,10 +49,9 @@ class HashTable {
       this.storage.set(index, bucket);
       return;
     }
-    // bucket has a LinkedList, so check for k,v pair
-    if (bucket[0].contains([key, value])) {
-      // have to do something, not sure what
-      // need to check for key and not value and replace value if need be
+    // bucket has a LinkedList, so check for key in list
+    if (bucket[0].containsKey(key)) {
+      bucket[0].replaceValue(key, value);
       this.storage.set(index, bucket);
       return;
     }

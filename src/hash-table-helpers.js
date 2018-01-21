@@ -88,6 +88,30 @@ class LinkedList {
     };
     return searchLinkedList(this.head);
   }
+  // same as returnValueIfContainsKey, but returns true or false instead
+  containsKey(key) {
+    if (this.head === null) return false;
+    const searchLinkedList = (node) => {
+      if (node.value[0] === key) return true;
+      if (node.value[0] === null) return false;
+      return searchLinkedList(node.next);
+    };
+    return searchLinkedList(this.head);
+  }
+  // I know this is bad, but please don't judge me
+  // same as contains key, but replaces value and returns nothing;
+  replaceValue(key, value) {
+    if (this.head === null) return;
+    const searchLinkedList = (node) => {
+      if (node.value[0] === key) {
+        node.value[1] = value;
+        return;
+      }
+      if (node.value[0] === null) return;
+      return searchLinkedList(node.next);
+    };
+    return searchLinkedList(this.head);
+  }
 }
 /* eslint-disable no-bitwise, operator-assignment */
 // This is hash function you'll be using to hash keys
