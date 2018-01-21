@@ -82,7 +82,7 @@ class LinkedList {
       // if we find the key, return true (changed true to node.value[1])
       if (node.value[0] === key) return node.value[1];
       // if we reach the end without finding the value, return false (changed false to undefined)
-      if (node.value[0] === null) return undefined;
+      if (node.next === null) return undefined;
       // check this node.next's value, and continue recursion until given true or false
       return searchLinkedList(node.next);
     };
@@ -93,7 +93,7 @@ class LinkedList {
     if (this.head === null) return false;
     const searchLinkedList = (node) => {
       if (node.value[0] === key) return true;
-      if (node.value[0] === null) return false;
+      if (node.next === null) return false;
       return searchLinkedList(node.next);
     };
     return searchLinkedList(this.head);
@@ -107,7 +107,7 @@ class LinkedList {
         node.value[1] = value;
         return;
       }
-      if (node.value[0] === null) return;
+      if (node.next === null) return;
       return searchLinkedList(node.next);
     };
     return searchLinkedList(this.head);
