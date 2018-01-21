@@ -34,6 +34,60 @@ class LimitedArray {
     this.storage[index] = value;
   }
 }
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+  }
+
+  addToTail(value) {
+    const newNode = {
+      next: null,
+      value,
+    };
+    // if LinkedList is empty, add a new node that is both the head and the tail, AND RETURN
+    if (this.head === null) {
+      this.head = newNode;
+      this.tail = newNode;
+      return;
+    }
+    // not empty, so set old tail.next to new Node and insert newNode as tail
+    this.tail.next = newNode;
+    this.tail = newNode;
+  }
+
+  removeHead() {
+    // if the LinkedList is empty, do nothing
+    if (this.head === null) return;
+    // if only 1 element in LinkedList, store the head's value,
+    // remove the node, and return stored value
+    if (this.head.next === null) {
+      const value = this.head.value;
+      this.head = null;
+      this.tail = null;
+      return value;
+    }
+    // more than 1 element, so replace head with its next
+    const value = this.head.value;
+    this.head = this.head.next;
+    return value;
+  }
+
+  returnKeyIfContainsValue(value) {
+    // if no elements, return false (changed false to undefined)
+    if (this.head === null) return undefined;
+    // define a recursive function that searches Linked List
+    const searchLinkedList = (node) => {
+      // if we find the value, return true (changed true to value)
+      if (node.value[0] === value[0]) return value[1];
+      // if we reach the end without finding the value, return false (changed false to undefined)
+      if (node.value[0] === null) return undefined;
+      // check this node.next's value, and continue recursion until given true or false
+      return searchLinkedList(node.next);
+    };
+  }
+}
 /* eslint-disable no-bitwise, operator-assignment */
 // This is hash function you'll be using to hash keys
 // There's some bit-shifting magic going on here, but essentially, all it is doing is performing the modulo operator
@@ -52,4 +106,5 @@ const getIndexBelowMax = (str, max) => {
 module.exports = {
   LimitedArray,
   getIndexBelowMax,
+  LinkedList,
 };

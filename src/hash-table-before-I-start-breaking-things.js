@@ -16,7 +16,7 @@ class HashTable {
     oldStorage.each((bucket) => {
       if (!bucket) return;
       bucket.forEach((pair) => {
-        this.insert(pair[0], pair[1]); // this will break with linked list
+        this.insert(pair[0], pair[1]);
       });
     });
   }
@@ -36,29 +36,10 @@ class HashTable {
   insert(key, value) {
     if (this.capacityIsFull()) this.resize();
     const index = getIndexBelowMax(key.toString(), this.limit);
-    const bucket = this.storage.get(index) || [];
+    let bucket = this.storage.get(index) || [];
 
-    // bucket = bucket.filter(item => item[0] !== key);
-    // bucket.push([key, value]);
-    // this.storage.set(index, bucket);
-    // if bucket is empty, create a new list, add the k,v pair, and push it to bucket, AND RETURN
-    if (bucket.length === 0) {
-      const newList = new LinkedList();
-      newList.addToTail([key, value]);
-      bucket.push(newList);
-      this.storage.set(index, bucket);
-      return;
-    }
-    // bucket has a LinkedList, so check for k,v pair
-    if (bucket[0].contains([key, value])) {
-      // have to do something, not sure what
-      // need to check for key and not value and replace value if need be
-      this.storage.set(index, bucket);
-      return;
-    }
-    // bucket contains a LinkedList but not our k,v pair
-    // add our k,v pair to tail of LinkedList
-    bucket[0].addToTail([key, value]);
+    bucket = bucket.filter(item => item[0] !== key);
+    bucket.push([key, value]);
     this.storage.set(index, bucket);
   }
   // Removes the key, value pair from the hash table
@@ -79,10 +60,12 @@ class HashTable {
   retrieve(key) {
     const index = getIndexBelowMax(key.toString(), this.limit);
     const bucket = this.storage.get(index);
+    let retrieved;
     if (bucket) {
-      return bucket[0].returnKeyIfContainsValue(key);
+      retrieved = bucket.filter(item => item[0] === key)[0];
     }
-    return undefined;
+
+    return retrieved ? retrieved[1] : undefined;
   }
 }
 
