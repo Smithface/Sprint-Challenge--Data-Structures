@@ -112,6 +112,16 @@ class LinkedList {
     };
     return searchLinkedList(this.head);
   }
+  // one more time, apparently
+  // callInsertOnAllBucketPairs() {
+  //   if (this.head === null) return;
+  //   const loopLinkedList = (node) => {
+  //     oldStorage.insert(node.value[0], node.value[1]);
+  //     if (node.next === null) return;
+  //     return loopLinkedList(node.next);
+  //   };
+  //   return loopLinkedList(this.head);
+  // }
 }
 /* eslint-disable no-bitwise, operator-assignment */
 // This is hash function you'll be using to hash keys

@@ -15,9 +15,13 @@ class HashTable {
     this.storage = new LimitedArray(this.limit);
     oldStorage.each((bucket) => {
       if (!bucket) return;
-      bucket.forEach((pair) => {
-        this.insert(pair[0], pair[1]); // this will break with linked list
-      });
+      if (bucket[0].head === null) return;
+      const loopLinkedList = (node) => {
+        this.insert(node.value[0], node.value[1]);
+        if (node.next === null) return;
+        loopLinkedList(node.next);
+      };
+      loopLinkedList(bucket[0].head);
     });
   }
 
